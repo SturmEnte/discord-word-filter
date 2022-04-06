@@ -43,7 +43,9 @@ client.on("messageCreate", (message) => {
 	message.content.split(" ").forEach((word) => {
 		if (bannedWords.includes(word)) {
 			message.delete();
-			message.author.send("The word you used is banned on " + message.guild.name);
+			message.author.send(
+				'The word " ' + word + '" is banned on ' + message.guild.name
+			);
 			console.log(
 				message.author.username +
 					" sent a message with the following banned word: " +

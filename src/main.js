@@ -38,6 +38,16 @@ client.on("ready", (client) => {
 	console.log(`Logged in as ${client.user.tag}`);
 	registerCommands();
 });
+
+client.on("message", (message) => {
+	message.content.split(" ").forEach((word) => {
+		if (bannedWords.includes(word)) {
+			message.delete();
+			message.author.send("The word you used is banned on " + message.guild.name);
+		}
+	});
+});
+
 async function registerCommands() {
 	const commands = JSON.parse(fs.readFileSync(__dirname + "/commands.json"));
 

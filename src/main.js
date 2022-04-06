@@ -84,3 +84,7 @@ function loadBannedWords() {
 	}
 	return [];
 }
+
+function saveBannedWords() {
+	fs.writeFileSync("../bannedWords.json", JSON.stringify(bannedWords));
+}

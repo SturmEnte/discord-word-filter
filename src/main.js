@@ -77,8 +77,8 @@ async function registerCommands() {
 }
 
 function loadBannedWords() {
-	if (fs.existsSync("../bannedWords.json")) {
-		const bannedWords = JSON.parse(fs.readFileSync("../bannedWords.json"));
+	if (fs.existsSync("./bannedWords.json")) {
+		const bannedWords = JSON.parse(fs.readFileSync("./bannedWords.json"));
 		// Checking if bannedWords is an array by checking if it has a length prop
 		if (bannedWords && bannedWords.length) return bannedWords;
 	}
@@ -86,5 +86,5 @@ function loadBannedWords() {
 }
 
 function saveBannedWords() {
-	fs.writeFileSync("../bannedWords.json", JSON.stringify(bannedWords));
+	fs.writeFileSync("./bannedWords.json", JSON.stringify(bannedWords));
 }

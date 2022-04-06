@@ -16,9 +16,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-console.log("Hello World");
 require("dotenv/config");
+const fs = require("fs");
 const { Client } = require("discord.js");
+
 // Check if the required env vars have been specified
 if (!process.env.TOKEN) {
 	console.error("Please specify a token for the bot");
@@ -63,4 +64,13 @@ async function registerCommands() {
 	}
 
 	console.log("Registered commands");
+}
+
+function loadBannedWords() {
+	if (fs.existsSync("../bannedWords.json")) {
+		const bannedWords = JSON.parse(fs.readFileSync("../bannedWords.json"));
+		// Checking if bannedWords is an array by checking if it has a length prop
+		if (bannedWords && bannedWords.length) return bannedWords;
+	}
+	return [];
 }

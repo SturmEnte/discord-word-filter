@@ -17,3 +17,20 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 console.log("Hello World");
+require("dotenv/config");
+const { Client } = require("discord.js");
+// Check if the required env vars have been specified
+if (!process.env.TOKEN) {
+	console.error("Please specify a token for the bot");
+	process.exit(1);
+} else if (!process.env.TARGET_GUILD_ID) {
+	console.error("Please specify a target guild id");
+	process.exit(1);
+}
+
+const client = new Client({ intents: ["GUILD_MESSAGES"] });
+client.login(process.env.TOKEN);
+
+client.on("ready", (client) => {
+	console.log(`Logged in as ${client.user.tag}`);
+});

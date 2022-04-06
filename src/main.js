@@ -35,6 +35,7 @@ client.login(process.env.TOKEN);
 
 client.on("ready", (client) => {
 	console.log(`Logged in as ${client.user.tag}`);
+	registerCommands();
 });
 async function registerCommands() {
 	const commands = JSON.parse(fs.readFileSync(__dirname + "/commands.json"));

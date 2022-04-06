@@ -28,9 +28,38 @@ if (!process.env.TOKEN) {
 	process.exit(1);
 }
 
+const bannedWords = loadBannedWords();
+
 const client = new Client({ intents: ["GUILD_MESSAGES"] });
 client.login(process.env.TOKEN);
 
 client.on("ready", (client) => {
 	console.log(`Logged in as ${client.user.tag}`);
 });
+async function registerCommands() {
+	const commands = JSON.parse(fs.readFileSync(__dirname + "/commands.json"));
+
+	// Get the target guild
+	const targetGuild = await (
+		await client.guilds.fetch()
+	)
+		.filter((guild, key) => key === process.env.TARGET_GUILD_ID)
+		.first()
+		.fetch();
+
+	for (let i = 0; i < commands.length; i++) {
+		(
+			await client.application.commands.create(commands[i], targetGuild.id)
+		).permissions.add({
+			permissions: [
+				{
+					id: targetGuild.ownerId,
+					type: "USER",
+					permission: true,
+				},
+			],
+		});
+	}
+
+	console.log("Registered commands");
+}

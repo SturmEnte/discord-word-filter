@@ -1,0 +1,28 @@
+[
+	{
+		"name": "add-banned-word",
+		"description": "Add a word to the banned words list",
+		"defaultPermission": false,
+		"options": [
+			{
+				"name": "word",
+				"description": "The word to be added to the list",
+				"type": "STRING",
+				"required": true
+			}
+		]
+	},
+	{
+		"name": "remove-banned-word",
+		"description": "Remove a word to the banned words list",
+		"defaultPermission": false,
+		"options": [
+			{
+				"name": "word",
+				"description": "The word to be removed from the list",
+				"type": "STRING",
+				"required": true
+			}
+		]
+	}
+]

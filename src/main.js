@@ -48,6 +48,35 @@ client.on("message", (message) => {
 	});
 });
 
+client.on("interactionCreate", (interaction) => {
+	if (!interaction.isCommand()) return;
+
+	switch (interaction.commandName) {
+		case "add-banned-word":
+			bannedWords.push(interaction.options.getString("word"));
+			interaction.reply(
+				"Added **" +
+					interaction.options.getString("word") +
+					"** to the banned words list"
+			);
+			saveBannedWords();
+			break;
+		case "remove-banned-word":
+			bannedWords = bannedWords.filter(
+				(val) => val != interaction.options.getString("word")
+			);
+			interaction.reply(
+				"Removed **" +
+					interaction.options.getString("word") +
+					"** from the banned words list"
+			);
+			saveBannedWords();
+			break;
+		default:
+			break;
+	}
+});
+
 async function registerCommands() {
 	const commands = JSON.parse(fs.readFileSync(__dirname + "/commands.json"));
 

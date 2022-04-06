@@ -1,0 +1,13 @@
+{
+	"private": true,
+	"name": "discord-word-filter",
+	"main": "src/main.js",
+	"scripts": {
+		"start": "node .",
+		"dev": "nodemon ."
+	},
+	"author": "SturmEnte",
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	}
+}

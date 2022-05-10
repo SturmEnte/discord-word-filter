@@ -98,17 +98,7 @@ async function registerCommands() {
 		.fetch();
 
 	for (let i = 0; i < commands.length; i++) {
-		(
-			await client.application.commands.create(commands[i], targetGuild.id)
-		).permissions.add({
-			permissions: [
-				{
-					id: targetGuild.ownerId,
-					type: "USER",
-					permission: true,
-				},
-			],
-		});
+		await client.application.commands.create(commands[i], targetGuild.id);
 	}
 
 	console.log("Registered commands");

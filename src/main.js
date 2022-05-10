@@ -31,7 +31,9 @@ if (!process.env.TOKEN) {
 
 let bannedWords = loadBannedWords();
 
-const client = new Client({ intents: ["GUILD_MESSAGES", "GUILDS"] });
+const client = new Client({
+	intents: ["GUILD_MESSAGES", "GUILDS", "DIRECT_MESSAGES"],
+});
 client.login(process.env.TOKEN);
 
 client.on("ready", (client) => {
